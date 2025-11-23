@@ -1,7 +1,7 @@
 'use client';
 
 import { FormEvent, useEffect, useMemo, useState, useRef } from 'react';
-import { fetchAdminAPI, uploadFile, uploadMultipleFiles } from '@/lib/api';
+import { fetchAdminAPI, uploadFile, uploadMultipleFiles, type UploadContext } from '@/lib/api';
 import type { PortfolioItem, PortfolioMediaType } from '@/types/portfolio';
 import Image from 'next/image';
 import { getImageProps } from '@/lib/image-utils';
@@ -344,7 +344,7 @@ export default function AdminDashboard() {
       setUploadingFile(true);
       
       // Determine context based on field type
-      let context: { fileType?: string; portfolioId?: string; clientId?: string } | undefined;
+      let context: UploadContext | undefined;
       
       if (field === 'navLogoUrl') {
         context = { fileType: 'logo' };

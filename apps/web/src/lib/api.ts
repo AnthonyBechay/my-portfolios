@@ -1,6 +1,12 @@
 // API client for backend
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:10000';
 
+export type UploadContext = {
+  fileType?: 'logo' | 'profile' | 'client-logo' | 'portfolio-media' | 'portfolio-thumbnail' | 'portfolio-gallery' | 'portfolio-document';
+  portfolioId?: string;
+  clientId?: string;
+};
+
 export async function fetchAPI(endpoint: string, options?: RequestInit) {
   const url = `${API_URL}/api${endpoint}`;
   const response = await fetch(url, {
@@ -25,11 +31,7 @@ export async function fetchAdminAPI(endpoint: string, options?: RequestInit) {
 
 export async function uploadFile(
   file: File,
-  context?: {
-    fileType?: 'logo' | 'profile' | 'client-logo' | 'portfolio-media' | 'portfolio-thumbnail' | 'portfolio-gallery' | 'portfolio-document';
-    portfolioId?: string;
-    clientId?: string;
-  }
+  context?: UploadContext
 ): Promise<{ url: string; filename: string }> {
   const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:10000';
   const formData = new FormData();
@@ -66,11 +68,7 @@ export async function uploadFile(
 
 export async function uploadMultipleFiles(
   files: File[],
-  context?: {
-    fileType?: 'logo' | 'profile' | 'client-logo' | 'portfolio-media' | 'portfolio-thumbnail' | 'portfolio-gallery' | 'portfolio-document';
-    portfolioId?: string;
-    clientId?: string;
-  }
+  context?: UploadContext
 ): Promise<{ files: Array<{ url: string; filename: string }> }> {
   const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:10000';
   const formData = new FormData();
