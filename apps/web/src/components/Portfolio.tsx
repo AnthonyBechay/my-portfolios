@@ -13,10 +13,17 @@ type Category = {
   order: number;
 };
 
+interface PageContent {
+  portfolioTitle?: string;
+  portfolioSubtitle?: string;
+  portfolioDescription?: string;
+}
+
 export default async function Portfolio() {
-  const [items, categoriesData]: [PortfolioItem[], Category[]] = await Promise.all([
+  const [items, categoriesData, pageContent]: [PortfolioItem[], Category[], PageContent | null] = await Promise.all([
     fetchAPI('/portfolio').catch(() => []),
     fetchAPI('/categories').catch(() => []),
+    fetchAPI('/page-content').catch(() => null),
   ]);
 
   const categoryCounts = new Map<string, number>();
@@ -69,21 +76,17 @@ export default async function Portfolio() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-6 mb-12 sm:mb-16">
           <div className="inline-flex items-center justify-center gap-2 sm:gap-3 text-xs tracking-[0.4em] uppercase font-semibold text-primary/80 mb-3 sm:mb-4">
-            <span className="h-px w-8 sm:w-16 bg-gradient-to-r from-transparent via-primary/60 to-primary/40 animate-pulse" />
+            <span className="h-px w-8 sm:w-16 bg-gradient-to-r from-transparent via-primary/60 to-primary/40" />
             <span className="relative">
-              <span className="absolute inset-0 blur-sm bg-primary/20"></span>
-              <span className="relative">Featured Work</span>
+              <span className="relative">{pageContent?.portfolioSubtitle || 'Featured Work'}</span>
             </span>
-            <span className="h-px w-8 sm:w-16 bg-gradient-to-l from-transparent via-primary/60 to-primary/40 animate-pulse" />
+            <span className="h-px w-8 sm:w-16 bg-gradient-to-l from-transparent via-primary/60 to-primary/40" />
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-[family-name:var(--font-playfair)] text-balance leading-tight px-4">
-            <span className="inline-block bg-gradient-to-r from-foreground via-primary/90 to-foreground bg-clip-text text-transparent">
-              A living gallery of films, essays, decks, and visual diaries
-            </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-[family-name:var(--font-playfair)] text-balance leading-tight px-4 text-foreground">
+            {pageContent?.portfolioTitle || 'A living gallery of films, essays, decks, and visual diaries'}
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-foreground-muted max-w-3xl mx-auto leading-relaxed px-4">
-            Every medium is a different instrument. Explore treatments, brand films, photo essays, and documents crafted for premium studios,
-            streamers, and fearless founders.
+          <p className="text-base sm:text-lg md:text-xl text-foreground/70 max-w-3xl mx-auto leading-relaxed px-4">
+            {pageContent?.portfolioDescription || 'Every medium is a different instrument. Explore treatments, brand films, photo essays, and documents crafted for premium studios, streamers, and fearless founders.'}
           </p>
         </div>
 

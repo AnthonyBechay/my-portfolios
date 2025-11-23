@@ -16,10 +16,17 @@ export default async function Home() {
   const name = settings?.name || 'Edmond Haddad';
   const tagline = settings?.tagline || 'Creative Producer & Director';
   const enableCinematicIntro = settings?.enableCinematicIntro ?? true;
+  const introLoadingText = settings?.introLoadingText || 'Loading Experience';
 
   return (
     <>
-      {enableCinematicIntro && <CinematicIntro name={name} tagline={tagline} />}
+      {enableCinematicIntro && (
+        <CinematicIntro
+          name={name}
+          tagline={tagline}
+          loadingText={introLoadingText}
+        />
+      )}
       <Hero />
       <About />
       <Portfolio />

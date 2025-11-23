@@ -43,7 +43,8 @@
       "Bash(pnpm db:generate:*)",
       "Bash(pnpm db:push:*)",
       "Bash(pnpm db:test:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(pnpm build:web:*)"
     ],
     "deny": [],
     "ask": []

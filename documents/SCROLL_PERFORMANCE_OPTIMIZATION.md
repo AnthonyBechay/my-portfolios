@@ -144,3 +144,4 @@ If scroll performance issues persist:
 - All animations now use IntersectionObserver or CSS-only approaches
 - GPU acceleration hints added to prevent repaints
 
+

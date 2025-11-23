@@ -3,11 +3,11 @@
 /* Cinematic Creative Portfolio Design System */
 :root {
   /* Cinematic Color Palette - Film Production Inspired */
-  --background: #6C63FF;
-  --background-light: #6C63FF;
+  --background: #0a0a12;
+  --background-light: #0f0f1a;
   --background-card: rgba(255, 255, 255, 0.03);
   --foreground: #f8f9fa;
-  --foreground-muted: #a0a8b0;
+  --foreground-muted: #9ca3af;
 
   /* Primary - Rich Gold (Awards, Prestige, Achievement) */
   --primary: #D4AF37;
@@ -69,9 +69,6 @@
   --font-courier: var(--font-courier);
 }
 
-/* Smooth scrolling only on html, not all elements */
-/* Removed global smooth scroll to prevent conflicts */
-
 /* Performance optimizations */
 html {
   scroll-behavior: smooth;
@@ -80,9 +77,17 @@ html {
   text-rendering: optimizeLegibility;
 }
 
+/* Optimize scrolling performance */
+@supports (scroll-behavior: smooth) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Scroll snap for sections (optional smooth feeling) */
 section[id],
 [id^="section-"] {
-  scroll-margin-top: 120px;
+  scroll-margin-top: 100px;
 }
 
 :focus-visible {
@@ -138,14 +143,15 @@ body {
   width: 100%;
   min-height: 100vh;
   position: relative;
-  background: #6C63FF;
+  background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  contain: layout style paint;
   /* Ensure body is the ONLY scroll container */
   overscroll-behavior: none;
-  /* Smooth scrolling */
+  /* Enable smooth scrolling on touch devices */
   -webkit-overflow-scrolling: touch;
+  /* Optimize paint performance */
+  isolation: isolate;
 }
 
 /* Background overlays removed - using solid color instead */
@@ -282,10 +288,10 @@ img, video, iframe {
 
 @keyframes glowPulse {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(108, 99, 255, 0.3), 0 0 40px rgba(108, 99, 255, 0.1);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3), 0 0 40px rgba(212, 175, 55, 0.1);
   }
   50% {
-    box-shadow: 0 0 40px rgba(108, 99, 255, 0.6), 0 0 80px rgba(108, 99, 255, 0.2);
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.6), 0 0 80px rgba(212, 175, 55, 0.2);
   }
 }
 
@@ -383,8 +389,8 @@ img, video, iframe {
 
 .glass-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 60px rgba(108, 99, 255, 0.3);
-  border-color: rgba(108, 99, 255, 0.3);
+  box-shadow: 0 20px 60px rgba(212, 175, 55, 0.2);
+  border-color: rgba(212, 175, 55, 0.3);
 }
 
 /* Cinematic Gradient Text */
@@ -406,19 +412,19 @@ img, video, iframe {
 
 /* Modern Button Styles */
 .btn-primary {
-  background: linear-gradient(135deg, #6C63FF 0%, #8B85FF 100%);
-  color: white;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  color: #0a0a12;
   padding: 1rem 2rem;
   border-radius: 12px;
   font-weight: 600;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border: none;
-  box-shadow: 0 4px 20px rgba(108, 99, 255, 0.3);
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(108, 99, 255, 0.5);
+  box-shadow: 0 8px 30px rgba(212, 175, 55, 0.5);
 }
 
 .btn-secondary {
@@ -446,7 +452,7 @@ img, video, iframe {
 
 .hover-lift:hover {
   transform: translateY(-4px) translateZ(0);
-  box-shadow: 0 10px 30px rgba(108, 99, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
 }
 
 .hover-glow {
@@ -458,7 +464,7 @@ img, video, iframe {
   content: '';
   position: absolute;
   inset: -3px;
-  background: linear-gradient(45deg, #6C63FF, #FF6584, #00D9FF);
+  background: linear-gradient(45deg, var(--primary), var(--accent), var(--highlight));
   border-radius: inherit;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -499,7 +505,7 @@ img, video, iframe {
   width: 0;
   height: 0;
   border-radius: 50%;
-  background: rgba(108, 99, 255, 0.2);
+  background: rgba(212, 175, 55, 0.15);
   transform: translate(-50%, -50%);
   transition: width 0.6s, height 0.6s;
 }
@@ -526,22 +532,28 @@ img, video, iframe {
   transform: translateY(0) translateZ(0);
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar - Slim and elegant */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(15, 12, 41, 0.5);
+  background: rgba(0, 0, 0, 0.2);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #D4AF37 0%, #06B6D4 100%);
-  border-radius: 6px;
+  background: var(--primary);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #F4D03F 0%, #22D3EE 100%);
+  background: var(--primary-light);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) rgba(0, 0, 0, 0.2);
 }
 
 /* Film grain texture (subtle) */
@@ -571,7 +583,7 @@ img, video, iframe {
 .spotlight-input:focus {
   background: rgba(255, 255, 255, 0.08);
   border-color: var(--primary);
-  box-shadow: 0 0 30px rgba(108, 99, 255, 0.3), 0 0 60px rgba(108, 99, 255, 0.1);
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.3), 0 0 60px rgba(212, 175, 55, 0.1);
   outline: none;
 }
 
@@ -596,6 +608,6 @@ img, video, iframe {
 
 .modern-card:hover {
   transform: translateY(-5px);
-  border-color: rgba(108, 99, 255, 0.4);
+  border-color: rgba(212, 175, 55, 0.3);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }

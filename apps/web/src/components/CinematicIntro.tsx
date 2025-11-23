@@ -5,9 +5,10 @@ import { useEffect, useState } from 'react';
 interface CinematicIntroProps {
   name: string;
   tagline: string;
+  loadingText?: string;
 }
 
-export default function CinematicIntro({ name, tagline }: CinematicIntroProps) {
+export default function CinematicIntro({ name, tagline, loadingText = 'Loading Experience' }: CinematicIntroProps) {
   const [isVisible, setIsVisible] = useState(true);
   const [stage, setStage] = useState(0);
 
@@ -132,7 +133,7 @@ export default function CinematicIntro({ name, tagline }: CinematicIntroProps) {
               <div className="h-full bg-gradient-to-r from-yellow-500 via-cyan-500 to-orange-500 rounded-full animate-loading-bar" />
             </div>
             <p className="text-white/40 text-xs text-center mt-3 tracking-widest uppercase">
-              Loading Experience
+              {loadingText}
             </p>
           </div>
         </div>

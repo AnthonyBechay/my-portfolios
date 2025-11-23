@@ -36,49 +36,61 @@ export default function HeroClient({ settings, pageContent }: HeroClientProps) {
 
   return (
     <>
-      <section id="hero" className="relative py-16 md:py-24 flex items-center justify-center overflow-hidden" style={{ contain: 'layout style paint', minHeight: '500px' }}>
+      <section id="hero" className="relative min-h-[90vh] py-20 md:py-32 flex items-center justify-center overflow-hidden" style={{ contain: 'layout style paint' }}>
+        {/* Subtle gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-background/95" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent" />
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-7xl mx-auto">
             {/* Main Content Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
               {/* Left Column - Text */}
-              <div className="space-y-6 text-center lg:text-left">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-[family-name:var(--font-playfair)] gradient-text leading-tight font-bold" style={{ contain: 'layout style' }}>
+              <div className="space-y-8 text-center lg:text-left">
+                {/* Welcome badge */}
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
+                  <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                  <span className="text-sm text-primary font-medium tracking-wide">{settings.welcomeMessage || 'Welcome to my portfolio'}</span>
+                </div>
+
+                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-[family-name:var(--font-playfair)] gradient-text leading-[1.1] font-bold" style={{ contain: 'layout style' }}>
                   {settings.name}
                 </h1>
 
-                <p className="text-base sm:text-lg md:text-xl text-primary tracking-wide font-semibold">
+                <p className="text-lg sm:text-xl md:text-2xl text-primary tracking-wide font-semibold">
                   {heroSubheadline}
                 </p>
 
-                <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-[family-name:var(--font-playfair)] text-foreground leading-tight italic font-medium">
+                <p className="text-xl sm:text-2xl md:text-3xl text-foreground/80 leading-relaxed font-light max-w-xl">
                   {heroHeadline}
                 </p>
 
                 {/* Stats Row */}
-                <div className="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4 pt-4">
-                  <div className="glass-card px-4 sm:px-6 py-3 sm:py-4 rounded-xl hover-lift flex-shrink-0">
-                    <div className="text-3xl sm:text-4xl font-[family-name:var(--font-playfair)] gradient-text-gold font-bold">
+                <div className="flex flex-wrap justify-center lg:justify-start gap-4 sm:gap-6 pt-6">
+                  <div className="text-center lg:text-left">
+                    <div className="text-4xl sm:text-5xl font-[family-name:var(--font-playfair)] gradient-text-gold font-bold">
                       {settings.yearsExperience}+
                     </div>
-                    <div className="text-foreground-muted text-xs sm:text-sm tracking-wider uppercase font-medium">Years</div>
+                    <div className="text-foreground/60 text-xs sm:text-sm tracking-wider uppercase font-medium mt-1">Years</div>
                   </div>
-                  <div className="glass-card px-4 sm:px-6 py-3 sm:py-4 rounded-xl hover-lift flex-shrink-0">
-                    <div className="text-3xl sm:text-4xl font-[family-name:var(--font-playfair)] gradient-text-gold font-bold">
+                  <div className="w-px h-16 bg-foreground/10 hidden sm:block" />
+                  <div className="text-center lg:text-left">
+                    <div className="text-4xl sm:text-5xl font-[family-name:var(--font-playfair)] gradient-text-gold font-bold">
                       {settings.projectsCompleted}+
                     </div>
-                    <div className="text-foreground-muted text-xs sm:text-sm tracking-wider uppercase font-medium">Projects</div>
+                    <div className="text-foreground/60 text-xs sm:text-sm tracking-wider uppercase font-medium mt-1">Projects</div>
                   </div>
-                  <div className="glass-card px-4 sm:px-6 py-3 sm:py-4 rounded-xl hover-lift flex-shrink-0">
-                    <div className="text-3xl sm:text-4xl font-[family-name:var(--font-playfair)] gradient-text-gold font-bold">
+                  <div className="w-px h-16 bg-foreground/10 hidden sm:block" />
+                  <div className="text-center lg:text-left">
+                    <div className="text-4xl sm:text-5xl font-[family-name:var(--font-playfair)] gradient-text-gold font-bold">
                       {settings.clientsServed}+
                     </div>
-                    <div className="text-foreground-muted text-xs sm:text-sm tracking-wider uppercase font-medium">Clients</div>
+                    <div className="text-foreground/60 text-xs sm:text-sm tracking-wider uppercase font-medium mt-1">Clients</div>
                   </div>
                 </div>
 
                 {/* CTAs */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-6">
                   <a
                     href="#portfolio"
                     className="btn-primary text-center font-semibold text-lg"
@@ -220,18 +232,14 @@ export default function HeroClient({ settings, pageContent }: HeroClientProps) {
           </div>
         )}
 
-        {/* Static background orbs - animations disabled for performance */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none" style={{ contain: 'layout style paint' }}>
-          <div 
-            className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" 
+        {/* Subtle decorative elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ contain: 'layout style paint' }}>
+          <div
+            className="absolute -top-40 -right-40 w-80 h-80 bg-primary/8 rounded-full blur-3xl"
             style={{ contain: 'layout style paint', willChange: 'auto', transform: 'translateZ(0)' }}
           />
-          <div 
-            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl" 
-            style={{ contain: 'layout style paint', willChange: 'auto', transform: 'translateZ(0)' }}
-          />
-          <div 
-            className="absolute top-1/2 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl" 
+          <div
+            className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent/5 rounded-full blur-3xl"
             style={{ contain: 'layout style paint', willChange: 'auto', transform: 'translateZ(0)' }}
           />
         </div>

@@ -883,6 +883,24 @@ export default function AdminDashboard() {
               <div className="w-11 h-6 bg-white/20 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
             </label>
           </div>
+
+          {/* Cinematic Intro Text Customization */}
+          {(siteSettings.enableCinematicIntro ?? true) && (
+            <div className="pt-4 border-t border-white/10 space-y-4">
+              <p className="text-sm text-white/60">
+                The intro displays your Name and Tagline. Customize the loading text below:
+              </p>
+              <label className={labelClass}>
+                Intro Loading Text
+                <input
+                  className={textInputClass}
+                  value={siteSettings.introLoadingText || ''}
+                  onChange={(event) => setSiteSettings((prev) => ({ ...prev, introLoadingText: event.target.value }))}
+                  placeholder="Loading Experience"
+                />
+              </label>
+            </div>
+          )}
         </div>
 
         <div className="grid gap-4 md:grid-cols-2">
@@ -1015,6 +1033,9 @@ export default function AdminDashboard() {
       'heroSubheadline',
       'aboutTitle',
       'aboutSubtitle',
+      'portfolioSubtitle',
+      'portfolioTitle',
+      'portfolioDescription',
       'skillsTitle',
       'skillsSubtitle',
       'contactTitle',
@@ -1024,30 +1045,50 @@ export default function AdminDashboard() {
       'clientsSubtitle',
     ];
 
+    const fieldLabels: Record<string, string> = {
+      heroHeadline: 'Hero Main Headline',
+      heroSubheadline: 'Hero Subheadline (Tagline)',
+      aboutTitle: 'About Section Title',
+      aboutSubtitle: 'About Section Subtitle',
+      portfolioSubtitle: 'Portfolio Badge Text',
+      portfolioTitle: 'Portfolio Section Title',
+      portfolioDescription: 'Portfolio Section Description',
+      skillsTitle: 'Skills Section Title',
+      skillsSubtitle: 'Skills Section Subtitle',
+      contactTitle: 'Contact Section Title',
+      contactSubtitle: 'Contact Section Subtitle',
+      contactDescription: 'Contact Section Description',
+      clientsTitle: 'Clients Section Title',
+      clientsSubtitle: 'Clients Section Subtitle',
+    };
+
+    const textareaFields = ['portfolioTitle', 'portfolioDescription', 'clientsTitle', 'contactDescription'];
+
     return (
       <form onSubmit={savePageContent} className="space-y-6">
         <header>
           <p className="text-xs uppercase tracking-[0.4em] text-white/60">Section copy</p>
           <h2 className="text-2xl font-semibold">Page content</h2>
           <p className="text-sm text-white/60 mt-2">
-            For clientsTitle, you can use HTML like: Trusted by &lt;span className=&quot;bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent&quot;&gt;World-Class Brands&lt;/span&gt;
+            Customize all the text that appears throughout your landing page. Changes appear immediately after saving.
           </p>
         </header>
         {fields.map((field) => (
           <label key={field} className={labelClass}>
-            {field}
-            {field === 'clientsTitle' ? (
+            {fieldLabels[field] || field}
+            {textareaFields.includes(field) ? (
               <textarea
                 className={`${textInputClass} min-h-[80px]`}
                 value={pageContent[field] || ''}
                 onChange={(event) => setPageContent((prev) => ({ ...prev, [field]: event.target.value }))}
-                placeholder="e.g., Trusted by <span class='bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent'>World-Class Brands</span>"
+                placeholder={`Enter ${fieldLabels[field] || field}...`}
               />
             ) : (
               <input
                 className={textInputClass}
                 value={pageContent[field] || ''}
                 onChange={(event) => setPageContent((prev) => ({ ...prev, [field]: event.target.value }))}
+                placeholder={`Enter ${fieldLabels[field] || field}...`}
               />
             )}
           </label>
