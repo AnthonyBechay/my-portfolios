@@ -21,6 +21,13 @@ Detailed documentation of the Backblaze B2 file storage integration:
 - Example workflows
 - Key implementation details
 
+### [COOLIFY_HTTPS_SETUP.md](./COOLIFY_HTTPS_SETUP.md)
+Guide for configuring HTTPS in Coolify:
+- Enabling SSL/TLS in Coolify
+- Setting environment variables with HTTPS URLs
+- Troubleshooting HTTP/HTTPS issues
+- Verification checklist
+
 ## Quick Reference
 
 **For deployment**: See [ARCHITECTURE.md](./ARCHITECTURE.md) → Deployment Architecture

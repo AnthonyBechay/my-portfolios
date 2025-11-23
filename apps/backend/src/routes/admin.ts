@@ -18,8 +18,26 @@ router.post('/login', async (req: Request, res: Response) => {
 
     if (verifyPassword(password)) {
       const sessionToken = createSession();
-      const frontendUrl = process.env.FRONTEND_URL || '';
-      const useSecureCookies = frontendUrl.startsWith('https://');
+      
+      // Determine frontend URL and protocol
+      // Priority: 1) FRONTEND_URL env var, 2) Request headers, 3) Default
+      let frontendUrl = process.env.FRONTEND_URL || '';
+      
+      // If FRONTEND_URL is not set, try to construct from request headers
+      if (!frontendUrl) {
+        const protocol = req.headers['x-forwarded-proto'] || (req.secure ? 'https' : 'http');
+        const host = req.headers['x-forwarded-host'] || req.headers.host;
+        if (host) {
+          frontendUrl = `${protocol}://${host}`;
+        }
+      }
+      
+      // Determine if we should use secure cookies
+      // Check: 1) FRONTEND_URL starts with https, 2) X-Forwarded-Proto is https, 3) req.secure
+      const useSecureCookies = 
+        frontendUrl.startsWith('https://') ||
+        req.headers['x-forwarded-proto'] === 'https' ||
+        req.secure;
 
       // Extract parent domain for cookie sharing (e.g., .37.27.181.201.sslip.io)
       let cookieDomain: string | undefined;
