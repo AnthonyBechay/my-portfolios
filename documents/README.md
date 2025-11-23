@@ -28,6 +28,13 @@ Guide for configuring HTTPS in Coolify:
 - Troubleshooting HTTP/HTTPS issues
 - Verification checklist
 
+### [SCROLL_PERFORMANCE_OPTIMIZATION.md](./SCROLL_PERFORMANCE_OPTIMIZATION.md)
+Scroll performance optimization guide:
+- IntersectionObserver implementation
+- Scroll-triggered animation optimization
+- Layout thrashing prevention
+- GPU acceleration techniques
+
 ## Quick Reference
 
 **For deployment**: See [ARCHITECTURE.md](./ARCHITECTURE.md) → Deployment Architecture

@@ -66,7 +66,14 @@ export default function Header() {
   };
 
   return (
-    <header className="fixed top-0 z-50 w-full bg-black/80 backdrop-blur-md border-b border-gold/10">
+    <header 
+      className="fixed top-0 z-50 w-full bg-black/80 backdrop-blur-md border-b border-gold/10"
+      style={{ 
+        contain: 'layout style paint',
+        willChange: 'auto',
+        transform: 'translateZ(0)' // GPU acceleration
+      }}
+    >
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
