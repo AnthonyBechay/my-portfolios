@@ -36,10 +36,8 @@ export default function SkillsClient({
             </span>
             <span className="h-px w-16 bg-gradient-to-l from-transparent via-primary/60 to-primary/40 animate-pulse" />
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-[family-name:var(--font-playfair)] text-balance leading-tight">
-            <span className="inline-block bg-gradient-to-r from-foreground via-primary/90 to-foreground bg-clip-text text-transparent">
-              {skillsTitle}
-            </span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-[family-name:var(--font-playfair)] text-balance leading-tight text-white">
+            {skillsTitle}
           </h2>
         </div>
       </ScrollReveal>

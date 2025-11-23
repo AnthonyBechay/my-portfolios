@@ -44,7 +44,8 @@
       "Bash(pnpm db:push:*)",
       "Bash(pnpm db:test:*)",
       "Bash(find:*)",
-      "Bash(pnpm build:web:*)"
+      "Bash(pnpm build:web:*)",
+      "Bash(npx tsc:*)"
     ],
     "deny": [],
     "ask": []

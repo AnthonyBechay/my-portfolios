@@ -2,12 +2,12 @@
 
 /* Cinematic Creative Portfolio Design System */
 :root {
-  /* Cinematic Color Palette - Film Production Inspired */
-  --background: #0a0a12;
-  --background-light: #0f0f1a;
-  --background-card: rgba(255, 255, 255, 0.03);
-  --foreground: #f8f9fa;
-  --foreground-muted: #9ca3af;
+  /* Cinematic Color Palette - Professional Dark Theme */
+  --background: #12141c;
+  --background-light: #1a1d28;
+  --background-card: rgba(255, 255, 255, 0.04);
+  --foreground: #ffffff;
+  --foreground-muted: #b8bcc8;
 
   /* Primary - Rich Gold (Awards, Prestige, Achievement) */
   --primary: #D4AF37;

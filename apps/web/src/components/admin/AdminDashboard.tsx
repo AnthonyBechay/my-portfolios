@@ -1020,6 +1020,75 @@ export default function AdminDashboard() {
             />
           </label>
         </div>
+
+        {/* Social Media Links */}
+        <div className="p-6 rounded-2xl border border-white/10 bg-white/5 space-y-4">
+          <h3 className="text-lg font-semibold text-white">Social Media Links</h3>
+          <p className="text-sm text-white/60">Add your social media profile URLs. These will appear in the header navigation.</p>
+          <div className="grid gap-4 md:grid-cols-2">
+            <label className={labelClass}>
+              LinkedIn
+              <input
+                className={textInputClass}
+                value={siteSettings.socialLinks?.linkedin || ''}
+                onChange={(event) => setSiteSettings((prev) => ({
+                  ...prev,
+                  socialLinks: { ...prev.socialLinks, linkedin: event.target.value }
+                }))}
+                placeholder="https://linkedin.com/in/username"
+              />
+            </label>
+            <label className={labelClass}>
+              Instagram
+              <input
+                className={textInputClass}
+                value={siteSettings.socialLinks?.instagram || ''}
+                onChange={(event) => setSiteSettings((prev) => ({
+                  ...prev,
+                  socialLinks: { ...prev.socialLinks, instagram: event.target.value }
+                }))}
+                placeholder="https://instagram.com/username"
+              />
+            </label>
+            <label className={labelClass}>
+              Vimeo
+              <input
+                className={textInputClass}
+                value={siteSettings.socialLinks?.vimeo || ''}
+                onChange={(event) => setSiteSettings((prev) => ({
+                  ...prev,
+                  socialLinks: { ...prev.socialLinks, vimeo: event.target.value }
+                }))}
+                placeholder="https://vimeo.com/username"
+              />
+            </label>
+            <label className={labelClass}>
+              YouTube
+              <input
+                className={textInputClass}
+                value={siteSettings.socialLinks?.youtube || ''}
+                onChange={(event) => setSiteSettings((prev) => ({
+                  ...prev,
+                  socialLinks: { ...prev.socialLinks, youtube: event.target.value }
+                }))}
+                placeholder="https://youtube.com/@channel"
+              />
+            </label>
+            <label className={labelClass}>
+              X (Twitter)
+              <input
+                className={textInputClass}
+                value={siteSettings.socialLinks?.twitter || ''}
+                onChange={(event) => setSiteSettings((prev) => ({
+                  ...prev,
+                  socialLinks: { ...prev.socialLinks, twitter: event.target.value }
+                }))}
+                placeholder="https://x.com/username"
+              />
+            </label>
+          </div>
+        </div>
+
         <button type="submit" className="rounded-full bg-white text-black px-6 py-3 font-semibold">
           Save site settings
         </button>
