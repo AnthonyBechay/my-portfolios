@@ -65,9 +65,24 @@ export default function CinematicIntro({ name, tagline }: CinematicIntroProps) {
       <div className="absolute inset-0 flex flex-col items-center justify-center px-4">
         {/* Film countdown style */}
         <div className={`transition-all duration-1000 ${stage >= 1 ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`}>
-          {/* Circular countdown */}
-          <div className="relative w-32 h-32 md:w-48 md:h-48 mb-8 md:mb-12">
-            <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
+          {/* Circular countdown - using transform-based mask for better performance */}
+          <div className="relative w-32 h-32 md:w-48 md:h-48 mb-8 md:mb-12" style={{ transform: 'translateZ(0)', willChange: 'transform' }}>
+            <svg className="w-full h-full" viewBox="0 0 100 100" style={{ transform: 'translateZ(0)' }}>
+              <defs>
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#D4AF37" />
+                  <stop offset="50%" stopColor="#06B6D4" />
+                  <stop offset="100%" stopColor="#EA580C" />
+                </linearGradient>
+                {/* Rotating clip-path for performance - uses transform instead of stroke-dashoffset */}
+                <clipPath id="countdown-clip">
+                  {/* Rotating pie slice that reveals the circle progressively */}
+                  <g className="animate-countdown-mask" style={{ transformOrigin: '50 50', transform: 'translateZ(0)', willChange: 'transform' }}>
+                    <path d="M 50 50 L 50 5 A 45 45 0 0 1 50 5 Z" />
+                  </g>
+                </clipPath>
+              </defs>
+              {/* Background circle */}
               <circle
                 cx="50"
                 cy="50"
@@ -76,24 +91,17 @@ export default function CinematicIntro({ name, tagline }: CinematicIntroProps) {
                 stroke="rgba(255,255,255,0.1)"
                 strokeWidth="2"
               />
-              <circle
-                cx="50"
-                cy="50"
-                r="45"
-                fill="none"
-                stroke="url(#gradient)"
-                strokeWidth="2"
-                strokeDasharray="283"
-                strokeDashoffset="0"
-                className="animate-countdown"
-              />
-              <defs>
-                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#D4AF37" />
-                  <stop offset="50%" stopColor="#06B6D4" />
-                  <stop offset="100%" stopColor="#EA580C" />
-                </linearGradient>
-              </defs>
+              {/* Animated circle using clip-path (transform-based, no stroke-dashoffset repaints) */}
+              <g clipPath="url(#countdown-clip)" style={{ transform: 'translateZ(0)' }}>
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="45"
+                  fill="none"
+                  stroke="url(#gradient)"
+                  strokeWidth="2"
+                />
+              </g>
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-yellow-400 via-cyan-400 to-orange-400 bg-clip-text text-transparent font-[family-name:var(--font-playfair)]">
@@ -150,9 +158,11 @@ export default function CinematicIntro({ name, tagline }: CinematicIntroProps) {
           from { transform: translateY(100%); }
           to { transform: translateY(0); }
         }
-        @keyframes countdown {
-          from { stroke-dashoffset: 0; }
-          to { stroke-dashoffset: 283; }
+        /* Performance-optimized countdown using transform instead of stroke-dashoffset */
+        /* This uses transform (GPU-accelerated) instead of stroke-dashoffset (causes repaints) */
+        @keyframes countdown-mask {
+          from { transform: rotate(-90deg); }
+          to { transform: rotate(270deg); }
         }
         @keyframes loading-bar {
           from { transform: translateX(-100%); }
@@ -164,8 +174,10 @@ export default function CinematicIntro({ name, tagline }: CinematicIntroProps) {
         .animate-slide-up {
           animation: slide-up 0.8s ease-out;
         }
-        .animate-countdown {
-          animation: countdown 4s linear;
+        /* Use transform-based animation for better performance (GPU-accelerated) */
+        .animate-countdown-mask {
+          animation: countdown-mask 4s linear;
+          transform-origin: 50% 50%;
         }
         .animate-loading-bar {
           animation: loading-bar 2s ease-in-out infinite;

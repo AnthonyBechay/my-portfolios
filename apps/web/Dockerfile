@@ -1,13 +1,18 @@
 # Web (Next.js) Dockerfile - Simplified for Coolify
 FROM node:20-alpine AS base
+
+# Install sharp dependencies for Next.js image optimization
+RUN apk add --no-cache libc6-compat vips-dev
+
 RUN corepack enable && corepack prepare pnpm@9.15.0 --activate
 WORKDIR /app
 
 # Copy package files
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml turbo.json ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml turbo.json ./ 
 COPY apps/web/package.json ./apps/web/
 
 # Install ALL dependencies (force development to get devDependencies)
+# Sharp is included in package.json for Next.js image optimization
 RUN NODE_ENV=development pnpm install --frozen-lockfile
 
 # Build stage
