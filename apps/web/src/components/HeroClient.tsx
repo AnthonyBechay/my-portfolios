@@ -61,24 +61,24 @@ export default function HeroClient({ settings, pageContent }: HeroClientProps) {
                 {/* Stats Row */}
                 <div className="flex flex-wrap justify-center lg:justify-start gap-6 pt-4">
                   <div className="text-center lg:text-left">
-                    <div className="text-3xl sm:text-4xl font-[family-name:var(--font-playfair)] text-primary font-bold">
+                    <div className="text-3xl sm:text-4xl font-[family-name:var(--font-playfair)] text-white font-bold">
                       {settings.yearsExperience}+
                     </div>
-                    <div className="text-white/50 text-xs tracking-wider uppercase font-medium mt-1">Years</div>
+                    <div className="text-white/60 text-xs tracking-wider uppercase font-medium mt-1">Years</div>
                   </div>
-                  <div className="w-px h-12 bg-white/10 hidden sm:block" />
+                  <div className="w-px h-12 bg-white/20 hidden sm:block" />
                   <div className="text-center lg:text-left">
-                    <div className="text-3xl sm:text-4xl font-[family-name:var(--font-playfair)] text-primary font-bold">
+                    <div className="text-3xl sm:text-4xl font-[family-name:var(--font-playfair)] text-white font-bold">
                       {settings.projectsCompleted}+
                     </div>
-                    <div className="text-white/50 text-xs tracking-wider uppercase font-medium mt-1">Projects</div>
+                    <div className="text-white/60 text-xs tracking-wider uppercase font-medium mt-1">Projects</div>
                   </div>
-                  <div className="w-px h-12 bg-white/10 hidden sm:block" />
+                  <div className="w-px h-12 bg-white/20 hidden sm:block" />
                   <div className="text-center lg:text-left">
-                    <div className="text-3xl sm:text-4xl font-[family-name:var(--font-playfair)] text-primary font-bold">
+                    <div className="text-3xl sm:text-4xl font-[family-name:var(--font-playfair)] text-white font-bold">
                       {settings.clientsServed}+
                     </div>
-                    <div className="text-white/50 text-xs tracking-wider uppercase font-medium mt-1">Clients</div>
+                    <div className="text-white/60 text-xs tracking-wider uppercase font-medium mt-1">Clients</div>
                   </div>
                 </div>
 

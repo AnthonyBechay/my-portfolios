@@ -27,40 +27,27 @@ export default function SkillsClient({
     <>
       {/* Section Header */}
       <ScrollReveal>
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center gap-3 text-xs tracking-[0.4em] uppercase font-semibold text-primary/80 mb-4">
-            <span className="h-px w-16 bg-gradient-to-r from-transparent via-primary/60 to-primary/40 animate-pulse" />
-            <span className="relative">
-              <span className="absolute inset-0 blur-sm bg-primary/20"></span>
-              <span className="relative">{skillsSubtitle}</span>
-            </span>
-            <span className="h-px w-16 bg-gradient-to-l from-transparent via-primary/60 to-primary/40 animate-pulse" />
-          </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-[family-name:var(--font-playfair)] text-balance leading-tight text-white">
+        <div className="text-center mb-12">
+          <p className="text-sm tracking-widest uppercase text-primary mb-3">{skillsSubtitle}</p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-[family-name:var(--font-playfair)] text-white">
             {skillsTitle}
           </h2>
         </div>
       </ScrollReveal>
 
       {/* Modern Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20 max-w-6xl mx-auto">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-16 max-w-5xl mx-auto">
         {cinematicStats.map((stat: Stat, index: number) => (
-          <ScrollReveal key={stat.id || index} rootMargin={`0px 0px -${50 + index * 20}px 0px`}>
+          <ScrollReveal key={stat.id || index} rootMargin={`0px 0px -${50 + index * 10}px 0px`}>
             <div
-              className="group relative rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.08] to-white/[0.03] backdrop-blur-sm p-8 text-center transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(108,99,255,0.2)] hover:border-primary/50"
-              style={{ minHeight: '200px', contain: 'layout style paint' }}
+              className="group relative rounded-2xl border border-white/10 bg-white/5 p-6 text-center transition-all duration-300 hover:bg-white/10 hover:border-primary/30"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-3xl" />
-              <div className="relative">
-                <div className="text-5xl mb-4 opacity-80 group-hover:scale-110 transition-transform duration-300">
-                  {stat.icon}
-                </div>
-                <div className="text-5xl md:text-6xl font-[family-name:var(--font-playfair)] bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent mb-3 font-bold">
-                  {stat.number}
-                </div>
-                <div className="text-foreground-muted tracking-wider uppercase text-sm font-medium">
-                  {stat.label}
-                </div>
+              <div className="text-3xl mb-3">{stat.icon}</div>
+              <div className="text-4xl md:text-5xl font-[family-name:var(--font-playfair)] text-white mb-2 font-bold">
+                {stat.number}
+              </div>
+              <div className="text-white/60 tracking-wider uppercase text-xs font-medium">
+                {stat.label}
               </div>
             </div>
           </ScrollReveal>

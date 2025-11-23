@@ -91,28 +91,28 @@ export default function Header() {
 
   return (
     <header
-      className="fixed top-0 z-50 w-full bg-background/95 backdrop-blur-md border-b border-white/5"
+      className="fixed top-0 z-50 w-full bg-background/95 backdrop-blur-md border-b border-white/5 overflow-hidden"
       style={{
         contain: 'layout style paint',
         willChange: 'auto',
         transform: 'translateZ(0)'
       }}
     >
-      <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+      <nav className="container mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div className="flex h-14 items-center justify-between overflow-hidden">
           {/* Logo */}
-          <Link href="/" className="flex items-center flex-shrink-0">
+          <Link href="/" className="flex items-center flex-shrink-0 max-h-10 overflow-hidden">
             {logoUrl ? (
               <Image
                 src={logoUrl}
                 alt="Site logo"
-                width={120}
-                height={40}
+                width={100}
+                height={32}
                 priority
-                className="h-10 w-auto object-contain"
+                className="h-8 w-auto object-contain max-w-[120px]"
               />
             ) : (
-              <span className="text-xl font-[family-name:var(--font-playfair)] text-primary tracking-wider">
+              <span className="text-lg font-[family-name:var(--font-playfair)] text-primary tracking-wider">
                 {logoText}
               </span>
             )}

@@ -60,7 +60,7 @@ export default async function Skills() {
   const skillsSubtitle = pageContent?.skillsSubtitle || 'Expertise';
 
   return (
-    <section id="skills" className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-b from-background via-background/95 to-background" style={{ contain: 'layout style paint' }}>
+    <section id="skills" className="relative py-20 md:py-28 bg-background" style={{ contain: 'layout style paint' }}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <SkillsClient
           cinematicStats={cinematicStats}
@@ -70,23 +70,6 @@ export default async function Skills() {
         />
       </div>
 
-      {/* Background decorations - static to prevent layout shifts */}
-      <div 
-        className="absolute top-1/4 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" 
-        style={{ 
-          contain: 'layout style paint',
-          willChange: 'auto',
-          transform: 'translateZ(0)'
-        }} 
-      />
-      <div 
-        className="absolute bottom-1/4 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl pointer-events-none" 
-        style={{ 
-          contain: 'layout style paint',
-          willChange: 'auto',
-          transform: 'translateZ(0)'
-        }} 
-      />
     </section>
   );
 }

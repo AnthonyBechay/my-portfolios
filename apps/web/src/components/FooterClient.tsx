@@ -103,37 +103,43 @@ export default function FooterClient({ settings }: FooterClientProps) {
   ].filter(Boolean) as { href: string; label: string; platform: string }[];
 
   return (
-    <footer className="relative border-t border-gold/10 bg-black py-16">
+    <footer className="relative border-t border-white/5 bg-background py-12">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center space-y-8">
+        <div className="flex flex-col items-center space-y-6">
           {/* Logo */}
-          <div className="text-3xl font-[family-name:var(--font-playfair)] text-gold tracking-wider">
+          <div className="text-2xl font-[family-name:var(--font-playfair)] text-primary tracking-wider">
             {settings.name || 'Edmond Haddad'}
           </div>
 
           {/* Navigation Links */}
-          <div className="flex flex-wrap justify-center gap-8 text-sm">
+          <div className="flex flex-wrap justify-center gap-6 text-sm">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-ivory/60 hover:text-gold transition-colors tracking-wider uppercase"
+                className="text-white/50 hover:text-primary transition-colors tracking-wider uppercase"
               >
                 {item.label}
               </Link>
             ))}
           </div>
 
-          {/* Social Links */}
+          {/* Divider */}
+          <div className="w-full max-w-xs h-px bg-white/10" />
+
+          {/* Tagline */}
+          <p className="text-white/40 text-sm">{tagline}</p>
+
+          {/* Social Links - Under Tagline */}
           {showSocialLinks && socialLinks.length > 0 && (
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               {socialLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full border border-gold/30 flex items-center justify-center text-gold/80 hover:border-gold hover:text-gold hover:bg-gold/5 transition-all duration-300"
+                  className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:border-primary hover:text-primary hover:bg-primary/5 transition-all duration-300"
                   aria-label={link.label}
                 >
                   {getSocialIcon(link.platform)}
@@ -142,19 +148,12 @@ export default function FooterClient({ settings }: FooterClientProps) {
             </div>
           )}
 
-          {/* Divider */}
-          <div className="w-full max-w-md h-px bg-gold/20" />
-
           {/* Copyright */}
-          <div className="text-ivory/40 text-sm text-center">
-            <p>&copy; {currentYear} {settings.name || 'Edmond Haddad'}. {copyrightText}</p>
-            <p className="mt-2 text-xs">{tagline}</p>
-          </div>
+          <p className="text-white/30 text-xs text-center pt-2">
+            &copy; {currentYear} {settings.name || 'Edmond Haddad'}. {copyrightText}
+          </p>
         </div>
       </div>
-
-      {/* Film grain */}
-      <div className="film-grain absolute inset-0 opacity-10 pointer-events-none" />
     </footer>
   );
 }
