@@ -145,3 +145,4 @@ If scroll performance issues persist:
 - GPU acceleration hints added to prevent repaints
 
 
+
